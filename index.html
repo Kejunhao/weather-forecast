@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div id="app">
+        
+        <h1>{{msg}}天气</h1>
+
+        <div  v-for="item in arr">
+            <table class="table">
+            <tr>
+            <th>{{item.day}}</th>
+            <th>{{item.date}}</th>
+            <th>{{item.week}}</th>
+            <th>{{item.tem}}</th>
+            <th>{{item.wea}}</th>
+            </tr>
+        </table>
+        </div>
+
+       
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                msg: 'i i i',
+                arr: []
+            },
+            methods: {
+                fn() {
+                    axios.get('https://www.tianqiapi.com/api/?appid=48565992&appsecret=rElkTg7U&version=v1').then(res => {
+                       
+                        this.msg = res.data.city;
+                        this.arr = res.data.data;
+                        console.log(res);
+                        
+                    })
+                }
+            }
+        })
+        vm.fn();
+            // axios.get('./data.json')
+            //     .then(res=>{
+            //         console.log(res.data.data)
+            //     })
+            //     .catch(err=>{
+            //         console.log(err)
+            //     })
+
+            // axios({
+            //     url:'./data.json',
+            //     method:'get'
+            // }).then(res=>{
+            //     console.log(res)
+            // }).catch(err=>{
+            //     console.log(err)
+            // })
+    </script>
+</body>
+
+</html>
